@@ -5,6 +5,7 @@ ARG rekor_version=1.2.2
 
 LABEL maintainer="Thomas Jungbauer"
 
+
 LABEL com.redhat.component="ubi9-container" \
       name="ubi9" \
       version="9.1.0"

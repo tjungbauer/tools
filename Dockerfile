@@ -29,4 +29,4 @@ RUN dnf install -y jq && yum clean all && rm -rf /var/cache/yum
 
 RUN rpm -i https://github.com/sigstore/cosign/releases/download/v${cosign_version}/cosign-${cosign_version}.x86_64.rpm
 
-RUN curl -O https://github.com/sigstore/rekor/releases/download/v${rekor_version}/rekor-cli-linux-amd64 && mv /root/rekor-cli-linux-amd64 /usr/bin/local/rekor-cli && chmod 755 /usr/bin/local/rekor-cli
+RUN curl -O https://github.com/sigstore/rekor/releases/download/v${rekor_version}/rekor-cli-linux-amd64 > /usr/local/bin/rekor-cli && chmod 755 /usr/local/bin/rekor-cli

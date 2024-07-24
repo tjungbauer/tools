@@ -1,9 +1,11 @@
 FROM registry.access.redhat.com/ubi9/ubi:latest
 
-ARG cosign_version=2.1.1
-ARG rekor_version=1.2.2
+ARG cosign_version=2.3.0
+ARG cosign_sub_version=-1
+ARG rekor_version=1.3.6
 
 LABEL maintainer="Thomas Jungbauer"
+
 
 LABEL com.redhat.component="ubi9-container" \
       name="ubi9" \
@@ -26,6 +28,6 @@ RUN mkdir -p /var/log/rhsm
 
 RUN dnf install -y jq && yum clean all && rm -rf /var/cache/yum
 
-RUN rpm -i https://github.com/sigstore/cosign/releases/download/v${cosign_version}/cosign-${cosign_version}.x86_64.rpm
+RUN rpm -i https://github.com/sigstore/cosign/releases/download/v${cosign_version}/cosign-${cosign_version}${cosign_sub_version}.x86_64.rpm
 
-RUN wget https://github.com/sigstore/rekor/releases/download/v${rekor_version}/rekor-cli-linux-amd64 && mv /root/rekor-cli-linux-amd64 /usr/bin/local/rekor-cli && chmod 755 /usr/bin/local/rekor-cli
+RUN curl -O https://github.com/sigstore/rekor/releases/download/v${rekor_version}/rekor-cli-linux-amd64 > /usr/local/bin/rekor-cli && chmod 755 /usr/local/bin/rekor-cli
